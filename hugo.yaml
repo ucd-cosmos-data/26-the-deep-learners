@@ -1,6 +1,6 @@
-baseURL: https://ucd-cosmos-data.github.io/demo/
+baseURL: https://ucd-cosmos-data.github.io/26-the-deep-learners/
 locale: en-us
-title: "Machine Hater"
+title: "The Deep Learners"
 theme: ["PaperMod"]
 
 params:
@@ -11,13 +11,13 @@ params:
     favicon: bonsai.jpeg #the small icon shown in the browser tab
   socialIcons:
     - name: github
-      url: "https://github.com/ucd-cosmos-data/demo"
+      url: "https://github.com/ucd-cosmos-data/26-the-deep-learners"
   math: True
   profileMode:
     enabled: true
-    title: "Machine Hater"
-    subtitle: "My two least favorite words: Machine and Learning."
-    imageUrl: "/demo/bonsai.jpeg"
+    title: "The Deep Learners"
+    subtitle: "<Description>"
+    imageUrl: "/26-the-deep-learners/bonsai.jpeg"
     imageWidth: 300
     imageHeight: 300
 
