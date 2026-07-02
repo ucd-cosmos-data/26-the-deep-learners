@@ -1,0 +1,107 @@
+{{- define "main" }}
+<header class="page-header">
+  {{- partial "breadcrumbs.html" . }}
+  <h1>{{ .Title }}</h1>
+  {{- if .Description }}
+  <div class="post-description">{{ .Description | markdownify }}</div>
+  {{- end }}
+</header>
+{{- if .Content }}
+<div class="post-content md-content">{{ .Content }}</div>
+{{- end }}
+<style>
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+.photo-grid button {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: zoom-in;
+}
+.photo-grid img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+.photo-grid button:hover img {
+  transform: scale(1.05);
+}
+.photo-lightbox {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  background: rgba(0, 0, 0, 0.85);
+  cursor: zoom-out;
+  align-items: center;
+  justify-content: center;
+}
+.photo-lightbox.active {
+  display: flex;
+}
+.photo-lightbox img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+}
+</style>
+{{- $exts := slice "jpg" "jpeg" "png" "gif" "webp" }}
+{{- $entries := os.ReadDir "static/photos" }}
+{{- $images := slice }}
+{{- range $entries }}
+  {{- if not .IsDir }}
+    {{- $ext := path.Ext .Name | strings.TrimPrefix "." | lower }}
+    {{- if in $exts $ext }}
+      {{- $images = $images | append .Name }}
+    {{- end }}
+  {{- end }}
+{{- end }}
+{{- if $images }}
+<div class="photo-grid">
+  {{- range sort $images }}
+  <button type="button" data-full="{{ (printf "photos/%s" .) | absURL }}">
+    <img src="{{ (printf "photos/%s" .) | absURL }}" alt="{{ . }}" loading="lazy">
+  </button>
+  {{- end }}
+</div>
+<div class="photo-lightbox" id="photo-lightbox">
+  <img id="photo-lightbox-img" src="" alt="">
+</div>
+<script>
+(function () {
+  var lightbox = document.getElementById("photo-lightbox");
+  var lightboxImg = document.getElementById("photo-lightbox-img");
+  document.querySelectorAll(".photo-grid button").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      lightboxImg.src = btn.getAttribute("data-full");
+      lightboxImg.alt = btn.querySelector("img").alt;
+      lightbox.classList.add("active");
+    });
+  });
+  lightbox.addEventListener("click", function () {
+    lightbox.classList.remove("active");
+    lightboxImg.src = "";
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      lightbox.classList.remove("active");
+      lightboxImg.src = "";
+    }
+  });
+})();
+</script>
+{{- else }}
+<p>No Photos.</p>
+{{- end }}
+{{- end }}{{- /* end main */ -}}

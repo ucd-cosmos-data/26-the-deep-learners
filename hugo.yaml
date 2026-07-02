@@ -1,0 +1,56 @@
+baseURL: https://ucd-cosmos-data.github.io/demo/
+locale: en-us
+title: "Machine Hater"
+theme: ["PaperMod"]
+
+params:
+  defaultTheme: auto
+  disableThemeToggle: true
+  ShowToc: false
+  assets:
+    favicon: bonsai.jpeg #the small icon shown in the browser tab
+  socialIcons:
+    - name: github
+      url: "https://github.com/ucd-cosmos-data/demo"
+  math: True
+  profileMode:
+    enabled: true
+    title: "Machine Hater"
+    subtitle: "My two least favorite words: Machine and Learning."
+    imageUrl: "/demo/bonsai.jpeg"
+    imageWidth: 300
+    imageHeight: 300
+
+menu:
+  main:
+    - identifier: Members
+      name: Members
+      url: /members/
+      weight: 10
+    - identifier: Project
+      name: Project
+      url: /project/
+      weight: 20
+    - identifier: Logs
+      name: Logs
+      url: /logs/
+      weight: 30
+    - identifier: Photos
+      name: Photos
+      url: /photos/
+      weight: 40
+    - identifier: course-site
+      name: Course Website
+      url: https://ucd-cosmos-data.github.io/
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        delimiters:
+          block:
+          - - $$
+            - $$
+        enable: true
