@@ -18,7 +18,7 @@ title: "Members"
 
 <div class="member-block" style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
 
-  <img src="26-the-deep-learners/members/VincentLu.jpeg"
+  <img src="/26-the-deep-learners/members/VincentLu.jpeg"
        alt="Vincent"
        style="width: 150px; height: 150px; object-fit: contain; border-radius: 0%; object-position: center; flex-shrink: 0;">
 
