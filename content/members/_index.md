@@ -35,6 +35,26 @@ title: "Members"
 
 </div>
 
+### William
+
+<div class="member-block" style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
+
+  <img src="/26-the-deep-learners/members/william liu.heic.jpeg"
+       alt="William"
+       style="width: 150px; height: 150px; object-fit: contain; border-radius: 0%; object-position: center; flex-shrink: 0;">
+
+  <div style="flex: 1; text-align: left;">
+    <p style="margin: 0; padding-top: 0.5em;">
+      William is a rising senior at Monta Vista High School. 
+    </p>
+    <ul style="margin: 0; padding-left: 20px;">
+      <li>Plays basketball</li>
+      <li>Likes to hang out with friends, eat, and sleep</li>
+    </ul>
+  </div>
+
+</div>
+
 ### Woodstock
 
 <div class="member-block" style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
