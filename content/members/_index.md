@@ -96,7 +96,7 @@ title: "Members"
   </div>
 
 </div>
-### **Michael Tang**
+### Michael Tang
 
 <div class="member-block" style="display: flex; align-items: flex-start; gap: 20px; flex-wrap: wrap; margin-bottom: 40px;">
 
