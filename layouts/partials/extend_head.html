@@ -22,3 +22,7 @@ document.addEventListener("DOMContentLoaded", function() {
 {{ if .HasShortcode "plotly" }}
   <script src="https://cdn.plot.ly/plotly-2.11.1.min.js"></script>
 {{ end }}
+
+<!-- night-garden theme (site-wide) -->
+<link rel="stylesheet" href="{{ "css/garden.css" | relURL }}">
+<script defer src="{{ "js/garden.js" | relURL }}"></script>

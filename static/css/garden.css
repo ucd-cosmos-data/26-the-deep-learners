@@ -1,0 +1,128 @@
+/* The Deep Learners — night-garden theme for every page.
+   Overrides PaperMod's CSS variables + adds flowery accents.
+   (Theme files untouched; loaded via extend_head.html.) */
+
+:root,
+:root[data-theme="dark"] {
+  --theme: #06130d;
+  --entry: #0c2117;
+  --primary: #eaf3ee;
+  --secondary: #9fb4ad;
+  --tertiary: #143726;
+  --content: #d9e9e0;
+  --code-block-bg: #0a1c13;
+  --code-bg: #0f2a1c;
+  --border: #1d4530;
+}
+
+/* soft garden atmosphere behind every page */
+body {
+  background:
+    radial-gradient(900px 480px at 88% -8%, rgba(244, 114, 182, 0.07), transparent 60%),
+    radial-gradient(1000px 560px at 8% 112%, rgba(63, 211, 154, 0.09), transparent 62%),
+    var(--theme);
+  background-attachment: fixed;
+}
+
+::selection { background: rgba(244, 114, 182, 0.35); color: #fff; }
+
+/* nav */
+#menu a:hover, .logo a:hover { color: #f9a8d4; }
+
+/* ---- page headers: gradient title + blossom divider ---- */
+.page-header h1 {
+  width: fit-content;
+  background: linear-gradient(115deg, #eafff5 0%, #7ff0c2 45%, #f9a8d4 92%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.page-header::after {
+  content: "\2740 \273F \2740"; /* ❀ ✿ ❀ */
+  display: block;
+  margin-top: 8px;
+  color: #f472b6;
+  font-size: 0.85rem;
+  letter-spacing: 0.6em;
+  opacity: 0.85;
+}
+
+/* ---- content ---- */
+.post-content a { color: #7ff0c2; }
+.post-content a:hover { color: #f9a8d4; }
+.post-content h2 { color: #cdeee0; }
+.post-content h3 { color: #7ff0c2; }
+.post-content h3::before {
+  content: "\273F  "; /* ✿ */
+  color: #f472b6;
+  font-size: 0.8em;
+}
+.post-content blockquote { border-inline-start: 3px solid #f472b6; }
+
+/* ---- list entries (Logs etc.): garden cards with a blossom in the corner ---- */
+.post-entry, .first-entry {
+  background: linear-gradient(180deg, rgba(63, 211, 154, 0.05), rgba(255, 255, 255, 0.01)), var(--entry);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.post-entry:hover, .first-entry:hover {
+  transform: translateY(-3px);
+  border-color: #2e6d49;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+.post-entry::before, .first-entry::before {
+  content: "\2740"; /* ❀ */
+  position: absolute;
+  right: 14px;
+  bottom: 8px;
+  color: rgba(244, 114, 182, 0.35);
+  font-size: 1.15rem;
+  pointer-events: none;
+}
+.entry-hint-parent, .entry-header h2 { color: #eafff5; }
+
+/* ---- Members page cards (styles the existing .member-block markup) ---- */
+.member-block {
+  background: linear-gradient(180deg, rgba(63, 211, 154, 0.05), rgba(255, 255, 255, 0.01)), var(--entry);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 18px;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.member-block:hover { transform: translateY(-3px); border-color: #2e6d49; }
+.member-block img { border-radius: 14px !important; }
+
+/* ---- footer ---- */
+.footer { color: var(--secondary); }
+.footer a:hover { color: #f9a8d4; }
+
+/* ---- subtle drifting petals (spawned by garden.js on inner pages) ---- */
+.garden-petals {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  overflow: hidden;
+}
+.garden-petal {
+  position: absolute;
+  top: -5vh;
+  border-radius: 100% 0 100% 0;
+  opacity: 0;
+  will-change: transform, opacity;
+  animation-name: garden-fall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+@keyframes garden-fall {
+  0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+  10%  { opacity: 0.75; }
+  50%  { transform: translateY(55vh) translateX(-26px) rotate(200deg); }
+  90%  { opacity: 0.65; }
+  100% { transform: translateY(112vh) translateX(16px) rotate(380deg); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .garden-petals { display: none; }
+}

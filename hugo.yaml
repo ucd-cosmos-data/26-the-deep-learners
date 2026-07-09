@@ -4,7 +4,7 @@ title: "The Deep Learners"
 theme: ["PaperMod"]
 
 params:
-  defaultTheme: auto
+  defaultTheme: dark
   disableThemeToggle: true
   ShowToc: false
   assets:
