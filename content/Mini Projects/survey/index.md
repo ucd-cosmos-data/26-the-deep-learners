@@ -1,9 +1,6 @@
 ---
-title: "Test"
-
+title: "Survey Design"
 ---
-# Survey Design
-
 
 # Data Cleaning
 ## Handling Missing Values
