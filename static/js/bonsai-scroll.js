@@ -89,7 +89,7 @@
       '<stop offset="0" stop-color="#4b3420"/><stop offset="1" stop-color="#7c5836"/>' +
     '</linearGradient>' +
     '<linearGradient id="mound" x1="0" y1="0" x2="0" y2="1">' +
-      '<stop offset="0" stop-color="#1e5c39"/><stop offset="1" stop-color="#0c2b1c"/>' +
+      '<stop offset="0" stop-color="#2f7d4f"/><stop offset="1" stop-color="#173f2a"/>' +
     '</linearGradient>';
   svg.appendChild(defs);
 
@@ -301,6 +301,29 @@
   var glow = document.getElementById("grow-light");
   var bloomGlow = document.getElementById("bloom-glow");
   var backdrop = document.getElementById("backdrop");
+
+  // koi fish that leap from the river at certain scroll moments
+  var kois = [];
+  (function koiInit() {
+    if (!backdrop) return;
+    var KOI = [
+      { x0: 684, x1: 734, y: 470, h: 58, a: 0.38, b: 0.50, s: 1.0,  c: "#ff8a4d" },
+      { x0: 772, x1: 714, y: 540, h: 68, a: 0.58, b: 0.70, s: 1.15, c: "#ff6e59" },
+      { x0: 640, x1: 700, y: 600, h: 62, a: 0.78, b: 0.88, s: 1.3,  c: "#ffa25e" }
+    ];
+    KOI.forEach(function (k) {
+      var g = document.createElementNS(SVGNS, "g");
+      g.setAttribute("opacity", "0");
+      g.innerHTML =
+        '<path d="M-15,0 C-10,-7 5,-7 11,-2 C13,0 13,0 11,2 C5,7 -10,7 -15,0 Z" fill="' + k.c + '"/>' +
+        '<path d="M-14,0 C-21,-7 -25,-3 -22,0 C-25,3 -21,7 -14,0 Z" fill="' + k.c + '"/>' +
+        '<ellipse cx="0" cy="2.4" rx="7" ry="3" fill="rgba(255,255,255,0.85)"/>' +
+        '<circle cx="8.4" cy="-1.6" r="1.3" fill="#22303c"/>';
+      backdrop.appendChild(g);
+      k.node = g;
+      kois.push(k);
+    });
+  })();
   var panels = Array.prototype.slice.call(document.querySelectorAll(".beat"));
   var finale = document.getElementById("finale");
   var cards = document.querySelectorAll("#finale .leaf-card");
@@ -339,9 +362,27 @@
 
     // landscape backdrop resolves from a blur into focus as you scroll
     if (backdrop) {
-      var bf = clamp((p - 0.1) / 0.62, 0, 1);
-      backdrop.style.filter = "blur(" + ((1 - bf) * 18).toFixed(1) + "px)";
-      backdrop.style.opacity = (0.08 + bf * 0.64).toFixed(3);
+      var bf = clamp((p - 0.06) / 0.56, 0, 1);
+      backdrop.style.filter = "blur(" + ((1 - bf) * 13).toFixed(1) + "px)";
+      backdrop.style.opacity = (0.38 + bf * 0.58).toFixed(3);
+    }
+
+    // koi leaping out of the river at set moments in the scroll
+    for (var ki = 0; ki < kois.length; ki++) {
+      var ko = kois[ki];
+      var kt = (p - ko.a) / (ko.b - ko.a);
+      if (kt <= 0 || kt >= 1) { ko.node.setAttribute("opacity", "0"); continue; }
+      var kx = ko.x0 + (ko.x1 - ko.x0) * kt;
+      var ky = ko.y - ko.h * 4 * kt * (1 - kt);        // parabolic arc
+      var vx = ko.x1 - ko.x0;
+      var vy = -ko.h * (4 - 8 * kt);
+      var ang = Math.atan2(vy, vx) * 57.2958;
+      var sx = 1;
+      if (vx < 0) { sx = -1; ang = ang - 180; }        // flip artwork when swimming left
+      var fade = Math.min(kt / 0.12, (1 - kt) / 0.12, 1);
+      ko.node.setAttribute("opacity", fade.toFixed(2));
+      ko.node.setAttribute("transform",
+        "translate(" + kx.toFixed(1) + " " + ky.toFixed(1) + ") rotate(" + ang.toFixed(1) + ") scale(" + (sx * ko.s).toFixed(2) + " " + ko.s + ")");
     }
 
     // petals settle into a pile at the bottom as the page is scrolled

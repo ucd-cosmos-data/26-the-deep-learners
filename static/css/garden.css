@@ -2,24 +2,61 @@
    Overrides PaperMod's CSS variables + adds flowery accents.
    (Theme files untouched; loaded via extend_head.html.) */
 
+/* flowery display serif (self-hosted, variable 400-900) */
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../fonts/playfair.woff2) format("woff2");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Playfair Display";
+  src: url(../fonts/playfair-italic.woff2) format("woff2");
+  font-weight: 400 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Great Vibes";
+  src: url(../fonts/greatvibes.woff2) format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* big loopy calligraphy for all display text; body copy stays readable */
+h1, h2, h3, .logo a {
+  font-family: "Great Vibes", "Playfair Display", cursive;
+  font-weight: 400;
+  letter-spacing: 0;       /* script letters must connect */
+  line-height: 1.25;
+}
+.logo a { font-size: 1.9rem; }
+.page-header h1 { font-size: clamp(3.2rem, 8vw, 4.8rem); }
+.post-content h2 { font-size: 2.6rem; }
+.post-content h3 { font-size: 2.2rem; }
+.entry-header h2 { font-size: 1.9rem; }
+
 :root,
 :root[data-theme="dark"] {
-  --theme: #06130d;
-  --entry: #0c2117;
-  --primary: #eaf3ee;
-  --secondary: #9fb4ad;
-  --tertiary: #143726;
-  --content: #d9e9e0;
-  --code-block-bg: #0a1c13;
-  --code-bg: #0f2a1c;
-  --border: #1d4530;
+  --theme: #10303a;
+  --entry: #17414b;
+  --primary: #f2f8f4;
+  --secondary: #b3cdc6;
+  --tertiary: #205860;
+  --content: #e3efe8;
+  --code-block-bg: #123842;
+  --code-bg: #185059;
+  --border: #2a6668;
 }
 
 /* soft garden atmosphere behind every page */
 body {
   background:
-    radial-gradient(900px 480px at 88% -8%, rgba(244, 114, 182, 0.07), transparent 60%),
-    radial-gradient(1000px 560px at 8% 112%, rgba(63, 211, 154, 0.09), transparent 62%),
+    radial-gradient(900px 480px at 88% -8%, rgba(244, 114, 182, 0.10), transparent 60%),
+    radial-gradient(1000px 560px at 8% 112%, rgba(63, 211, 154, 0.13), transparent 62%),
     var(--theme);
   background-attachment: fixed;
 }
