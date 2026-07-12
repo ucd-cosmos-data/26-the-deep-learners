@@ -4,15 +4,7 @@ title: "Exploring Health Trends Across California"
 
 ## Overview
 
-In this analysis, we explored health and socioeconomic differences among California counties. We created visualizations to examine asthma prevalence and the relationship between median household income and binge-drinking prevalence.
-
-## Asthma Prevalence by California County
-
-![Asthma prevalence by California county](asthma-prevalence.png)
-
-This choropleth map displays asthma prevalence across California counties. Each county is shaded according to its prevalence value, with darker colors representing higher prevalence.
-
-The visualization helps identify geographic patterns and counties that may experience a greater asthma burden.
+In this analysis, we explored health and socioeconomic differences among California counties. We created visualizations to examine the relationship between median household income and binge-drinking prevalence.
 
 ## Median Household Income vs. Binge Drinking
 
