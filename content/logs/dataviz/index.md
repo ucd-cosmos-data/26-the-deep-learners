@@ -8,7 +8,7 @@ In this analysis, we explored health and socioeconomic differences among Califor
 
 ## Median Household Income vs. Binge Drinking
 
-![Median household income versus binge drinking](income-vs-binge-drinking.png)
+![Median Household Income vs. Binge Drinking](income-vs-binge-drinking.png)
 
 This scatterplot compares median household income with adjusted binge-drinking prevalence. Each point represents a California county.
 
