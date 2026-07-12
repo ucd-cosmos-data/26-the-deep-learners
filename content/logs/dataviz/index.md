@@ -1,5 +1,5 @@
 ---
-title: "Exploring Health Trends Across California"
+title: "Exploring the Relation between Income and Drinking"
 ---
 
 ## Overview
@@ -16,7 +16,7 @@ The trendline suggests a weak negative relationship. Counties with higher median
 
 ## Conclusion
 
-Our visualizations show that health outcomes differ across California counties. Geographic and socioeconomic patterns may help explain some of these differences, but additional factors such as age, education, healthcare access, and urban or rural location should also be considered.
+Our visualizations show that there is a strong negative linear correlation in the relation between income and drinking. Geographic and socioeconomic patterns may help explain some of these differences, but additional factors such as age, education, healthcare access, and urban or rural location should also be considered.
 
 ## Notebook
 
