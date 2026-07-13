@@ -6,6 +6,6 @@ This week we started learning about the data science pipeline. Along with learni
 
 For our first mini project we created a survey about the correlation between two music genres and gender. To look further at this project you can click [here](https://ucd-cosmos-data.github.io/26-the-deep-learners/miniprojects/survey/)
 
-For our second mini project we explored whether binge drinking and median household income had a correlation within the counties of California. To look further into this project you can click [here](https://ucd-cosmos-data.github.io/26-the-deep-learners/miniprojects/survey/miniproject1/dataviz/)
+For our second mini project we explored whether binge drinking and median household income had a correlation within the counties of California. To look further into this project you can click [here](https://ucd-cosmos-data.github.io/26-the-deep-learners/miniprojects/miniproject1/)
 
 

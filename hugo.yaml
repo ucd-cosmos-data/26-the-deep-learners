@@ -36,7 +36,7 @@ menu:
       url: /logs/
       weight: 40
     - identifier: MiniProjects
-      name: MiniProjects
+      name: Mini Projects
       url: /miniprojects/
       weight: 30
     - identifier: course-site
