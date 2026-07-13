@@ -7,7 +7,7 @@ title: "Mini Project #2: Exploring the Relation between Income and Binge Drinkin
 In this analysis, we explored health and socioeconomic differences among California counties. We created visualizations to examine the relationship between median household income and binge-drinking prevalence.
 
 ## Question
-> Does the median household income and amount of binge-drinking cases in California have a correlation?
+> Does the median household income and percentage of binge-drinkers in California counties have a correlation?
 
 ## Hypothesis
 The counties that had higher and lower incomes would have higher rates of binge drinking compared to mid-income families. 
