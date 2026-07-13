@@ -35,7 +35,7 @@ To clean our datasets we first had to filter for California counties in both. Af
 
 The model [figure 3](#fig-scatterplot) in compares median household income with adjusted binge-drinking prevalence. Each point represents a California county.
 
-The trendline suggests a weak negative linear relationship. Counties with higher median household incomes tend to have slightly lower binge-drinking prevalence, but the relationship is not strong. This suggests that income alone does not explain differences in binge-drinking prevalence.
+The trendline suggests a weak negative linear relationship with out calculated correlation coefficient being equal to around -0.18. Counties with higher median household incomes tend to have slightly lower binge-drinking prevalence, but the relationship is not strong. This suggests that income alone does not explain differences in binge-drinking prevalence.
 
 This trend seen in [figure 3](#fig-scatterplot) can also be corroborated by the models in [figure 1](#fig-binge-drinking) and [figure 2](#fig-income). While low income and binge drinking cases are more prevelant in certain counties, this is not this not the case in counties with higher incomes.  
 
