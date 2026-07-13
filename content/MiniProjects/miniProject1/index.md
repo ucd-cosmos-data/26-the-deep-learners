@@ -13,9 +13,9 @@ In this analysis, we explored health and socioeconomic differences among Califor
 The counties that had higher and lower incomes would have higher rates of binge drinking compared to mid-income families. 
 
 ## Data Acquisition
-Binge Drinking: https://data.cdc.gov/resource/i46a-9kgh.json 
+Binge Drinking: https://data.cdc.gov/500-Cities-Places/PLACES-County-Data-GIS-Friendly-Format-2025-releas/i46a-9kgh/about_data 
 
-Median Household Income:
+Median Household Income: https://www.countyhealthrankings.org/health-data/community-conditions/social-and-economic-factors/income-employment-and-wealth/median-household-income?year=2025 
 
 ## Data Cleaning
 To clean our datasets we first had to filter for California counties in both. After this step for our median income data set we altered the county names so they would match the same formatting as the county names from the binge-drinking data set. Then for this data set we standardized the FIPS codes adding leading zero, so that there were the same amount of digits in each one. Once we did this we were able to merge the two data sets so we could compare the median income of each county the the rate of binge-drinking in each county. 
