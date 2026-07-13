@@ -18,8 +18,26 @@ Binge Drinking: https://data.cdc.gov/500-Cities-Places/PLACES-County-Data-GIS-Fr
 Median Household Income: https://www.countyhealthrankings.org/health-data/community-conditions/social-and-economic-factors/income-employment-and-wealth/median-household-income?year=2025 
 
 ## Data Cleaning
-To clean our datasets we first had to filter for California counties in both. After this step for our median income data set we altered the county names so they would match the same formatting as the county names from the binge-drinking data set. Then for this data set we standardized the FIPS codes adding leading zero, so that there were the same amount of digits in each one. Once we did this we were able to merge the two data sets so we could compare the median income of each county the the rate of binge-drinking in each county. 
+- To clean our datasets we first had to filter for California counties in both. 
+```python
+cali_df = income_df[income_df['State'] == 'California']
+```
 
+- After this step for our median income data set we altered the county names so they would match the same formatting as the county names from the binge-drinking data set. 
+```python
+cali_df['County'] = cali_df['County'].apply(lambda x: x[:len(x)-7])
+```
+
+Then for this data set we standardized the FIPS codes adding leading zero, so that there were the same amount of digits in each one. 
+```python
+cali_df['FIPS'] = cali_df['FIPS'].apply(lambda x: "0" + str(x))
+```
+Once we did this we were able to merge the two data sets so we could compare the median income of each county the the rate of binge-drinking in each county. 
+```python
+df = pd.merge(cali_df, binge_ca, on='County')
+
+df = df.loc[:, ['County', 'stateabbr', 'countyfips', 'BINGE_AdjPrev', 'Median Household Income']]
+```
 ## Figures
 <div id="fig-binge-drinking">
 {{< include-html "HTMLs/binge_drinking_choropleth.html" "Figure 1 - Binge Drinking Choropleth" >}}
