@@ -35,13 +35,9 @@ menu:
       name: Logs
       url: /logs/
       weight: 40
-    - identifier: Photos
-      name: Photos
-      url: /photos/
-      weight: 50
-    - identifier: Mini Projects
-      name: Mini Projects
-      url: /mini-projects/
+    - identifier: MiniProjects
+      name: MiniProjects
+      url: /miniprojects/
       weight: 30
     - identifier: course-site
       name: Course Website
