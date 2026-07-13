@@ -297,6 +297,18 @@
   .rail-fill { display: block; height: 100%; transform-origin: left; transform: scaleX(0);
     background: linear-gradient(90deg, var(--emerald), #22d3ee); }
 
+  /* ---- 3D depth ---- */
+  .grove-sticky { perspective: 1200px; perspective-origin: 50% 42%; }
+  .scene, .sky { will-change: transform; }
+  .pile { transform: translateZ(40px); }
+  .leaves { perspective: 900px; }
+  .hpetal {
+    position: absolute; left: 0; top: 0;
+    border-radius: 100% 0 100% 0;
+    pointer-events: none; opacity: 0;
+    will-change: transform, filter, opacity;
+  }
+
   @keyframes cue-run { 0% { top: -50%; } 100% { top: 100%; } }
 
   @media (max-width: 620px) {

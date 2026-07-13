@@ -283,6 +283,35 @@
     }
   })();
 
+  // -------- 3D petal helix orbiting the tree --------
+  var helix = [];
+  var HTURNS = 2.5;
+  (function helixInit() {
+    if (reduce) return;
+    var stick = document.querySelector(".grove-sticky");
+    var beatsEl = document.querySelector(".beats");
+    if (!stick || !beatsEl) return;
+    var COLORS = ["#f9a8d4", "#f472b6", "#fbcfe8", "#fda4af", "#f0abfc", "#6ee7b7", "#5eead4"];
+    var HN = window.innerWidth < 600 ? 22 : 34;
+    for (var i = 0; i < HN; i++) {
+      var s = document.createElement("span");
+      s.className = "hpetal";
+      var col = COLORS[i % COLORS.length];
+      var size = 9 + Math.random() * 12;
+      s.style.width = size.toFixed(1) + "px";
+      s.style.height = (size * 0.82).toFixed(1) + "px";
+      s.style.background = "radial-gradient(circle at 32% 28%, rgba(255,255,255,0.6), " + col + " 62%)";
+      s.style.boxShadow = "0 0 14px " + col;
+      stick.insertBefore(s, beatsEl);  // same z as beats, but beats paint above
+      helix.push({
+        el: s,
+        h: 0.06 + (i / (HN - 1)) * 0.88,                          // height along the strand
+        phase: (i / HN) * HTURNS * 2 * Math.PI + (i % 2) * Math.PI, // two strands, 180° apart
+        spin: Math.random() * 360
+      });
+    }
+  })();
+
   // -------- ambient life (anime loops) --------
   if (!reduce) {
     anime({ targets: seed, r: [4, 6.5], opacity: [0.6, 1], direction: "alternate", loop: true, duration: 900, easing: "easeInOutSine" });
@@ -298,6 +327,7 @@
   // -------- scroll → progress driver --------
   var foliageEl = canopyG;
   var scene = document.querySelector(".scene");
+  var skyEl = document.querySelector(".sky");
   var glow = document.getElementById("grow-light");
   var bloomGlow = document.getElementById("bloom-glow");
   var backdrop = document.getElementById("backdrop");
@@ -385,6 +415,37 @@
         "translate(" + kx.toFixed(1) + " " + ky.toFixed(1) + ") rotate(" + ang.toFixed(1) + ") scale(" + (sx * ko.s).toFixed(2) + " " + ko.s + ")");
     }
 
+    // camera-like 3D sway: the scene and sky counter-rotate as you scroll
+    var sway = reduce ? 0 : Math.sin(p * Math.PI * 3) * 7;   // degrees
+    if (scene) scene.style.transform = "rotateY(" + sway.toFixed(2) + "deg)";
+    if (skyEl && !reduce) {
+      skyEl.style.transform = "translateZ(-140px) scale(1.16) rotateY(" + (sway * 0.35).toFixed(2) + "deg)";
+    }
+
+    // petal helix: two strands spiral around the tree, front petals pass over it
+    if (helix.length) {
+      var hvw = window.innerWidth, hvh = window.innerHeight;
+      var hcx = hvw / 2;
+      var baseY = hvh * 0.94;
+      var hH = hvh * 0.72 * (0.25 + 0.75 * pt);              // climbs as the tree grows
+      var R = Math.min(hvw * 0.36, 380) * (0.45 + 0.55 * pt);
+      var rot = p * Math.PI * 5;                              // 2.5 full turns over the scroll
+      var hvis = clamp((p - 0.04) / 0.06, 0, 1) * clamp((0.93 - p) / 0.05, 0, 1);
+      for (var hi = 0; hi < helix.length; hi++) {
+        var hp = helix[hi];
+        var th = hp.phase + rot;
+        var zz = Math.sin(th);                                // -1 behind .. 1 in front
+        var depth = (zz + 1) / 2;
+        hp.el.style.transform =
+          "translate3d(" + (hcx + Math.cos(th) * R).toFixed(1) + "px," + (baseY - hp.h * hH).toFixed(1) + "px,0)" +
+          " scale(" + (0.5 + depth * 1.1).toFixed(2) + ")" +
+          " rotate(" + ((hp.spin + p * 540) % 360).toFixed(0) + "deg)";
+        hp.el.style.filter = "blur(" + ((1 - depth) * 2.5).toFixed(1) + "px)";
+        hp.el.style.opacity = ((0.25 + depth * 0.75) * hvis).toFixed(2);
+        hp.el.style.zIndex = zz > 0 ? 3 : 1;
+      }
+    }
+
     // petals settle into a pile at the bottom as the page is scrolled
     for (var pi = 0; pi < pilePetals.length; pi++) {
       var pp = pilePetals[pi];
@@ -399,12 +460,20 @@
     if (hFocus) hFocus.textContent = Math.round(focus * 100) + "%";
     if (railFill) railFill.style.transform = "scaleX(" + p.toFixed(4) + ")";
 
-    // story beats
+    // story beats ride a 3D arc: swing in from one side, rotate past, spiral away
     panels.forEach(function (el) {
       var a = parseFloat(el.dataset.start), b = parseFloat(el.dataset.end);
       var o = beatOpacity(p, a, b);
       el.style.opacity = o;
-      el.style.transform = "translate(-50%, " + ((1 - o) * 22).toFixed(1) + "px)";
+      if (reduce) {
+        el.style.transform = "translate(-50%, " + ((1 - o) * 22).toFixed(1) + "px)";
+      } else {
+        var q = clamp((p - a) / (b - a), 0, 1);
+        var e = a < 0.001 ? q : (q - 0.5) * 2;   // first beat starts centered
+        el.style.transform =
+          "translate(calc(-50% + " + (e * 16).toFixed(2) + "vw), " + ((1 - o) * 20).toFixed(1) + "px)" +
+          " perspective(900px) rotateY(" + (-e * 50).toFixed(1) + "deg)";
+      }
       el.style.pointerEvents = o > 0.5 ? "auto" : "none";
     });
 
@@ -421,7 +490,8 @@
         var cp = clamp((fp - ci * 0.1) / 0.45, 0, 1);
         var e = 1 - Math.pow(1 - cp, 3);        // easeOutCubic
         cards[ci].style.opacity = e.toFixed(3);
-        cards[ci].style.transform = "translateY(" + ((1 - e) * 18).toFixed(1) + "px) scale(" + (0.82 + 0.18 * e).toFixed(3) + ")";
+        cards[ci].style.transform = "translateY(" + ((1 - e) * 18).toFixed(1) + "px) scale(" + (0.82 + 0.18 * e).toFixed(3) + ")" +
+          (reduce ? "" : " rotateX(" + ((1 - e) * 45).toFixed(1) + "deg)");
       }
     }
     // dim the tree behind the finale so the link cards read clearly
