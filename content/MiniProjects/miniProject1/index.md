@@ -28,11 +28,11 @@ cali_df = income_df[income_df['State'] == 'California']
 cali_df['County'] = cali_df['County'].apply(lambda x: x[:len(x)-7])
 ```
 
-Then for this data set we standardized the FIPS codes adding leading zero, so that there were the same amount of digits in each one. 
+- Then for this data set we standardized the FIPS codes adding leading zero, so that there were the same amount of digits in each one. 
 ```python
 cali_df['FIPS'] = cali_df['FIPS'].apply(lambda x: "0" + str(x))
 ```
-Once we did this we were able to merge the two data sets so we could compare the median income of each county the the rate of binge-drinking in each county. 
+- Once we did this we were able to merge the two data sets so we could compare the median income of each county the the rate of binge-drinking in each county. 
 ```python
 df = pd.merge(cali_df, binge_ca, on='County')
 
