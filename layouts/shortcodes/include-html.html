@@ -1,0 +1,18 @@
+{{ $file := .Get 0 }}
+{{ $caption := .Get 1 }}
+
+<!-- 1. We wrap the map in a container that crops out the top 50 pixels -->
+<figure style="margin: 2rem auto; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff;">
+    <div style="width: 100%; height: 550px; overflow: hidden; position: relative;">
+        <!-- Negative margin pulls the iframe up, hiding the embedded python title area -->
+        <iframe src="{{ $file | relURL }}" 
+                style="width: 100%; height: 600px; border: none; position: absolute; top: -50px; left: 0;" 
+                scrolling="no">
+        </iframe>
+    </div>
+    
+    <!-- 2. Keep clean caption text showing at the bottom -->
+    <figcaption style="text-align: center; font-size: 0.9rem; color: #666; margin-top: 0.5rem; font-family: sans-serif;">
+        {{ $caption }}
+    </figcaption>
+</figure>

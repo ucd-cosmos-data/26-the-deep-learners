@@ -1,51 +1,44 @@
 ---
-title: "Mini Project #2: Exploring the Relation between Income and Drinking"
+title: "Mini Project #2: Exploring the Relation between Income and Binge Drinking"
 ---
 
 ## Overview
 
 In this analysis, we explored health and socioeconomic differences among California counties. We created visualizations to examine the relationship between median household income and binge-drinking prevalence.
 
-## County Visualization
-<figure id="income_map" style="margin: 2rem auto; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff;">
-    <iframe src="26-the-deep-learners/static//HTMLs/median_household_income_choropleth.html"
-    style="width: 100%; height: 600px; border: none; border-radius: 6px;"
-    scrolling="no">
-    </iframe>
-    <figcaption style="text-align: center; font-size: 0.9rem; color: #666"; margin-top: 0.5rem;>
-        Figure 1 - Median Household Income Choropleth
-    </figcaption>
-</figure>
+## Question
+> Does the median household income and amount of binge-drinking cases in California have a correlation?
 
-<figure id="income_map" style="margin: 2rem auto; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff;">
-    <iframe src="26-the-deep-learners/static/HTMLs/binge_drinking_choropleth.html"
-    style="width: 100%; height: 600px; border: none; border-radius: 6px;"
-    scrolling="no">
-    </iframe>
-    <figcaption style="text-align: center; font-size: 0.9rem; color: #666"; margin-top: 0.5rem;>
-        Figure 2 - Binge Drinking Choropleth
-    </figcaption>
-</figure>
-## Median Household Income vs. Binge Drinking
+## Hypothesis
+The counties that had higher and lower incomes would have higher rates of binge drinking compared to mid-income families. 
 
-<figure id="income_map" style="margin: 2rem auto; padding: 1rem; border: 1px solid #e5e7eb; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); background: #ffffff;">
-    <iframe src="26-the-deep-learners/static/HTMLs/scatterplot.html"
-    style="width: 100%; height: 600px; border: none; border-radius: 6px;"
-    scrolling="no">
-    </iframe>
-    <figcaption style="text-align: center; font-size: 0.9rem; color: #666"; margin-top: 0.5rem;>
-        Figure 1 - Median Household Income Choropleth
-    </figcaption>
-</figure>
+## Data Acquisition
+Binge Drinking: https://data.cdc.gov/500-Cities-Places/PLACES-County-Data-GIS-Friendly-Format-2025-releas/i46a-9kgh/about_data 
 
-This scatterplot compares median household income with adjusted binge-drinking prevalence. Each point represents a California county.
+Median Household Income: https://www.countyhealthrankings.org/health-data/community-conditions/social-and-economic-factors/income-employment-and-wealth/median-household-income?year=2025 
 
-The trendline suggests a weak negative relationship. Counties with higher median household incomes tend to have slightly lower binge-drinking prevalence, but the relationship is not strong. This suggests that income alone does not explain differences in binge-drinking prevalence.
+## Data Cleaning
+To clean our datasets we first had to filter for California counties in both. After this step for our median income data set we altered the county names so they would match the same formatting as the county names from the binge-drinking data set. Then for this data set we standardized the FIPS codes adding leading zero, so that there were the same amount of digits in each one. Once we did this we were able to merge the two data sets so we could compare the median income of each county the the rate of binge-drinking in each county. 
+
+## Figures
+<div id="fig-binge-drinking">
+{{< include-html "HTMLs/binge_drinking_choropleth.html" "Figure 1 - Binge Drinking Choropleth" >}}
+</div>
+<div id="fig-income">
+{{< include-html "HTMLs/median_household_income_choropleth.html" "Figure 2 - Household Income Choropleth" >}}
+</div>
+<div id="fig-scatterplot">
+{{< include-html "HTMLs/scatterplot.html" "Figure 3 - Binge Drinking vs Median Household Income" >}}
+</div>
+
+## Analysis
+
+The model [figure 3](#fig-scatterplot) in compares median household income with adjusted binge-drinking prevalence. Each point represents a California county.
+
+The trendline suggests a weak negative linear relationship. Counties with higher median household incomes tend to have slightly lower binge-drinking prevalence, but the relationship is not strong. This suggests that income alone does not explain differences in binge-drinking prevalence.
+
+This trend seen in [figure 3](#fig-scatterplot) can also be corroborated by the models in [figure 1](#fig-binge-drinking) and [figure 2](#fig-income). While low income and binge drinking cases are more prevelant in certain counties, this is not this not the case in counties with higher incomes.  
 
 ## Conclusion
 
-Our visualizations show that there is a strong negative linear correlation in the relation between income and drinking. Geographic and socioeconomic patterns may help explain some of these differences, but additional factors such as age, education, healthcare access, and urban or rural location should also be considered.
-
-## Notebook
-
-[View the complete Jupyter notebook](https://github.com/ucd-cosmos-data/26-the-deep-learners/blob/main/content/logs/dataviz/data_viz_executed.ipynb)
+Our visualizations show that there is a weak negative linear correlation in the relation between income and drinking. Geographic and socioeconomic patterns may help explain some of these differences, but additional factors such as age, education, healthcare access, and urban or rural location should also be considered.
