@@ -7,7 +7,7 @@ title: "Mini Project #2: Exploring the Relation between Income and Binge Drinkin
 In this analysis, we explored health and socioeconomic differences among California counties. We created visualizations to examine the relationship between median household income and binge-drinking prevalence.
 
 ## Question
-> Does the median household income and amount of binge-drinking cases in California have a correlation?
+> Does the median household income and percentage of binge-drinkers in California counties have a correlation?
 
 ## Hypothesis
 The counties that had higher and lower incomes would have higher rates of binge drinking compared to mid-income families. 
@@ -28,11 +28,11 @@ cali_df = income_df[income_df['State'] == 'California']
 cali_df['County'] = cali_df['County'].apply(lambda x: x[:len(x)-7])
 ```
 
-Then for this data set we standardized the FIPS codes adding leading zero, so that there were the same amount of digits in each one. 
+- Then for this data set we standardized the FIPS codes adding leading zero, so that there were the same amount of digits in each one. 
 ```python
 cali_df['FIPS'] = cali_df['FIPS'].apply(lambda x: "0" + str(x))
 ```
-Once we did this we were able to merge the two data sets so we could compare the median income of each county the the rate of binge-drinking in each county. 
+- Once we did this we were able to merge the two data sets so we could compare the median income of each county the the rate of binge-drinking in each county. 
 ```python
 df = pd.merge(cali_df, binge_ca, on='County')
 
