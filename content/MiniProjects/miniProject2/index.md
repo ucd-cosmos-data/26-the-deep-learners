@@ -1,6 +1,10 @@
 ---
 Title: "Mini Project 3"
 --- 
+## Map
+<div id="fig-cluster-plot" style="width: 100%; max-width: 1100px; margin: 0 auto;">
+{{< include-html "/HTMLs/cluster_plot.html" "Real-Estate Market Regions" >}}
+</div>\
 
 ### Code:
 ```python
