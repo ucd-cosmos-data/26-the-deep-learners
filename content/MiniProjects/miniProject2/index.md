@@ -6,6 +6,7 @@ Title: "Mini Project 3"
 {{< include-html "/HTMLs/cluster_plot.html" "Real-Estate Market Regions" >}}
 </div>\
 
+
 ### Code:
 ```python
 import pandas as pd
