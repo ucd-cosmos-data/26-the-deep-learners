@@ -1,11 +1,6 @@
 ---
 Title: "Mini Project 3"
 --- 
-## Map
-<div id="fig-cluster-plot" style="width: 100%; max-width: 1100px; margin: 0 auto;">
-{{< include-html "/HTMLs/cluster_plot.html" "Real-Estate Market Regions" >}}
-</div>\
-
 
 ### Explanation of the methodology
 
@@ -14,6 +9,11 @@ The purpose of K-Means in Unsupervised Learning is to split unlabeled data into 
 The Euclidean distance between an observation $\mathbf{x}_i$ and the centroid of cluster $k$, $\boldsymbol{\mu}_k$, is:
 
 $$d(\mathbf{x}_i,\boldsymbol{\mu}_k)=\sqrt{\sum_{j=1}^{p}\left(x_{ij}-\mu_{kj}\right)^2}$$
+
+## Map
+<div id="fig-cluster-plot" style="width: 100%; max-width: 1100px; margin: 0 auto;">
+{{< include-html "/HTMLs/cluster_plot.html" "Real-Estate Market Regions" >}}
+</div>\
 
 ### Code:
 ```python
